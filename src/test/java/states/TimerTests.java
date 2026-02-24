@@ -92,4 +92,50 @@ class TimerTests {
 		// when leaving the ringing makes sure the variable is false
 		assertEquals(false, AbstractTimer.getRing());
 	}
+
+	@Test
+	@DisplayName("Set Timer: after left, memTimer should be 0 and the ClockState shouldn't change")
+	void SetTimerStateLeft() {
+
+		// set the timer at 1
+		context.right();
+		context.tick();
+
+		// for the SetTimer State
+		assertSame(SetTimer.Instance(), context.currentState);
+
+		// was at 1
+		assertEquals(1, AbstractTimer.getMemTimer());
+		context.left();
+
+		// after left, memTimer at 0
+		assertEquals(0, AbstractTimer.getMemTimer());
+
+		// the state didn't change
+		assertSame(SetTimer.Instance(), context.currentState);
+
+	}
+
+	@Test
+	@DisplayName("Set Timer: after up, memTimer should be increased by 5 and the ClockState shouldn't change")
+	void SetTimerStateUp() {
+
+		// set the timer at 1
+		context.right();
+		context.tick();
+
+		// for the SetTimer State
+		assertSame(SetTimer.Instance(), context.currentState);
+
+		// was at 1
+		assertEquals(1, AbstractTimer.getMemTimer());
+		context.up();
+
+		// after left, memTimer at 0
+		assertEquals(6, AbstractTimer.getMemTimer());
+
+		// the state didn't change
+		assertSame(SetTimer.Instance(), context.currentState);
+
+	}
 }
