@@ -18,6 +18,7 @@ class TimerTests {
 	}
 
 	@Test
+	@DisplayName("Initialization: Should start in 'Timer' mode with Idle state and zeroed values")
 	void testInitialState() {
 		/*
 		 * When initialising the context (see setup() method above)
@@ -33,18 +34,21 @@ class TimerTests {
 	}
 
 	@Test
+	@DisplayName("Hierarchy: AbstractTimer entry point should default to IdleTimer")
 	void testInitialAbstractTimer() {
 		// The initial state of composite state AbstractTimer should be IdleTimer
 		assertSame(AbstractTimer.Instance(), IdleTimer.Instance());
 	}
 
 	@Test
+	@DisplayName("Hierarchy: ActiveTimer entry point should default to RunningTimer")
 	void testInitialActiveTimer() {
 		// The initial state of composite state ActiveTimer should be RunningTimer
 		assertSame(ActiveTimer.Instance(), RunningTimer.Instance());
 	}
 
 	@Test
+	@DisplayName("State Persistence: Toggling to Stopwatch and back should preserve the Timer sub-state")
 	void testHistoryState() {
 		current = AbstractTimer.Instance();
 		// after processing the left() event, we should arrive in the initial state of
@@ -60,6 +64,7 @@ class TimerTests {
 	}
 
 	@Test
+	@DisplayName("Alarm Logic: Ringing boolean should only be true when timer reaches zero")
 	void testRingBoolean() {
 		// set the timer at 1
 		context.right();
