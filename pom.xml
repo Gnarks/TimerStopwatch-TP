@@ -18,7 +18,20 @@
 		<maven.compiler.source>21</maven.compiler.source>
 		<maven.compiler.target>21</maven.compiler.target>
 		<jacoco.version>0.8.14</jacoco.version>
+		<cucumber.version>7.34.2</cucumber.version>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.junit</groupId>
+				<artifactId>junit-bom</artifactId>
+				<version>${junit.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<dependencies>
 		<dependency>
@@ -27,6 +40,26 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-suite</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-java</artifactId>
+			<version>${cucumber.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-junit-platform-engine</artifactId>
+			<version>${cucumber.version}</version>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -37,9 +70,9 @@
 				<configuration>
 					<properties>
 						<configurationParameters>
-							junit.platform.reporting.open.xml.enabled = true
-							junit.platform.reporting.output.dir = target/surefire-reports
-						</configurationParameters>
+							cucumber.publish.quiet = true
+							cucumber.junit-platform.naming-strategy = long
+							cucumber.plugin = html:target/cucumber-reports/cucumber.html </configurationParameters>
 					</properties>
 				</configuration>
 			</plugin>
